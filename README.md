@@ -1,6 +1,6 @@
-# Chat App
+# aicomm
 
-A modern, real-time chat application built with Vue.js and Tauri. It connects to the chat server which was introduced in [chat server](https://github.com/tyr-rust-bootcamp/05-chat).
+A modern, real-time chat application built with Vue.js and Tauri.
 
 ## Features
 
@@ -20,25 +20,40 @@ Before you begin, ensure you have met the following requirements:
 ## Setup
 
 1. Clone the repository:
+
    ```
-   git clone https://github.com/yourusername/chat-app.git
-   cd chat-app
+   git clone https://github.com/m104ngc4594/aicomm.git
+   cd aicomm
    ```
 
 2. Install dependencies:
    ```
+   cd chatapp
    yarn
    ```
 
-
 ## Running the App
 
-To run the desktop app, you could use:
+First, run the server:
+
 ```
+cd chat/chat_server
+cargo run
+
+cd chat/notify_server
+cargo run
+```
+
+To run the desktop app, you could use:
+
+```
+cd chatapp
 cargo tauri dev
 ```
 
 To run the web app, you could use:
+
 ```
+cd chatapp
 yarn dev
 ```
