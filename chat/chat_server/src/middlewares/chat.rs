@@ -51,7 +51,7 @@ mod tests {
         let token = state.ek.sign(user)?;
 
         let app = Router::new()
-            .route("/chat/:id/messages", get(handler))
+            .route("/chat/{id}/messages", get(handler))
             .layer(from_fn_with_state(state.clone(), verify_chat))
             .layer(from_fn_with_state(state.clone(), verify_token::<AppState>))
             .with_state(state);

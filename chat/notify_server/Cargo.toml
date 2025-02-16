@@ -2,24 +2,25 @@
 name = "notify-server"
 version = "0.1.0"
 edition = "2021"
+license = "MIT"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
 anyhow = { workspace = true }
 axum = { workspace = true }
-axum-extra = { version = "0.9.3", features = ["typed-header"] }
+axum-extra = { version = "0.10.0", features = ["typed-header"] }
 chat-core = { workspace = true }
-dashmap = "5.5.3"
-futures = "0.3.30"
+dashmap = "6.1.0"
+futures = "0.3.31"
 jwt-simple = { workspace = true }
 serde = { workspace = true }
-serde_json = "1.0.116"
+serde_json = "1.0.138"
 serde_yaml = { workspace = true }
 sqlx = { workspace = true }
 thiserror = { workspace = true }
 tokio = { workspace = true }
-tokio-stream = { version = "0.1.15", features = ["sync"] }
+tokio-stream = { version = "0.1.17", features = ["sync"] }
 tower-http = { workspace = true }
 tracing = { workspace = true }
 tracing-subscriber = { workspace = true }

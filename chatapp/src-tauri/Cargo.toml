@@ -13,18 +13,18 @@ name = "chatapp_lib"
 crate-type = ["lib", "cdylib", "staticlib"]
 
 [build-dependencies]
-tauri-build = { version = "2.0.0-rc", features = [] }
+tauri-build = { version = "2.0.5", features = [] }
 
 [dependencies]
-config = { version = "0.14.0", default-features = false, features = ["yaml"] }
-anyhow = "1.0.86"
+config = { version = "0.15.8", default-features = false, features = ["yaml"] }
+anyhow = "1.0.95"
 arc-swap = "1.7.1"
-dirs = "5.0.1"
+dirs = "6.0.0"
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
-tauri = { version = "2.0.0-rc", features = ["tray-icon"] }
-tauri-plugin-clipboard-manager = "2.0.0-rc"
-tauri-plugin-log = { version = "2.0.0-rc", features = ["colored"] }
-tauri-plugin-shell = "2.0.0-rc"
-tauri-plugin-window-state = "2.0.0-rc"
-tracing = { version = "0.1.40", features = ["log"] }
+tauri = { version = "2.2.5", features = ["tray-icon"] }
+tauri-plugin-clipboard-manager = "2.2.1"
+tauri-plugin-log = { version = "2.2.1", features = ["colored"] }
+tauri-plugin-shell = "2.2.0"
+tauri-plugin-window-state = "2.2.1"
+tracing = { version = "0.1.41", features = ["log"] }

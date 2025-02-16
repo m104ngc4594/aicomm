@@ -110,24 +110,6 @@ pub struct Message {
     pub created_at: DateTime<Utc>,
 }
 
-/*
--- add agent_type type
-CREATE TYPE agent_type AS ENUM ('proxy', 'reply', 'tap');
-
--- add chat_agent table
-CREATE TABLE IF NOT EXISTS chat_agents(
-  id bigserial PRIMARY KEY,
-  chat_id bigint NOT NULL REFERENCES chats(id),
-  name TEXT NOT NULL UNIQUE,
-  type agent_type NOT NULL DEFAULT 'reply',
-  prompt TEXT NOT NULL,
-  args JSONB NOT NULL,
-  created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP,
-  updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP,
-  UNIQUE(chat_id, agent_id)
-);
- */
-
 #[derive(Debug, Clone, ToSchema, Serialize, Deserialize, PartialEq, PartialOrd, sqlx::Type)]
 #[sqlx(type_name = "agent_type", rename_all = "snake_case")]
 #[serde(rename_all(serialize = "camelCase"))]
@@ -148,6 +130,7 @@ pub struct ChatAgent {
     pub name: String,
     pub r#type: AgentType,
     pub prompt: String,
+    #[schema(value_type = serde_json::Value)]
     pub args: sqlx::types::Json<serde_json::Value>,
     pub created_at: DateTime<Utc>,
     pub updated_at: DateTime<Utc>,

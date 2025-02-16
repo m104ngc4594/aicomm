@@ -7,8 +7,8 @@ use axum::{
 use tokio::fs;
 use tracing::{info, warn};
 
-use crate::{AppError, AppState, ChatFile, CreateMessage, ListMessages};
-use chat_core::User;
+use crate::{AppError, AppState, ChatFile, CreateMessage, ErrorOutput, ListMessages};
+use chat_core::{Message, User};
 
 /// Send a new message in the chat.
 #[utoipa::path(
