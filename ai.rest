@@ -1,0 +1,18 @@
+### use ollama
+POST http://localhost:11434/api/chat
+Content-Type: application/json
+
+{
+    "model": "deepseek-r1:32b",
+    "messages": [
+        {
+            "role": "system",
+            "content": "你是一个中国地理专家，擅长回答中国地理问题。"
+        },
+        {
+            "role": "user",
+            "content": "中国最长的河流是什么？"
+        }
+    ],
+    "stream": false
+}
