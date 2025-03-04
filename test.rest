@@ -168,3 +168,33 @@ Authorization: Bearer {{token}}
 
 GET http://localhost:6688/api/chats/1/messages?limit=6&last_id=5
 Authorization: Bearer {{token}}
+
+### list chat agents
+
+GET http://localhost:6688/api/chats/1/agents
+Authorization: Bearer {{token}}
+
+### create chat agent
+
+POST http://localhost:6688/api/chats/1/agents
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "name": "agent2",
+    "type": "proxy",
+    "prompt": "You are a helpful assistant.",
+    "args": {}
+}
+
+### update chat agent
+
+PATCH http://localhost:6688/api/chats/1/agents
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "id": 1,
+    "prompt": "You are a helpful assistant.",
+    "args": {"a": 2}
+}
