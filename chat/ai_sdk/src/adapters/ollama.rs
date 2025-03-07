@@ -1,4 +1,4 @@
-use crate::{AiService, Message};
+use crate::{AiAdapter, AiService, Message};
 use anyhow::Result;
 use reqwest::Client;
 use serde::{Deserialize, Serialize};
@@ -85,6 +85,12 @@ impl From<Message> for OllamaMessage {
             role: message.role.to_string(),
             content: message.content,
         }
+    }
+}
+
+impl From<OllamaAdapter> for AiAdapter {
+    fn from(adapter: OllamaAdapter) -> Self {
+        Self::Ollama(adapter)
     }
 }
 

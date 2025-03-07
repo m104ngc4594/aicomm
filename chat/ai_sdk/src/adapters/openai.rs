@@ -1,9 +1,9 @@
-use crate::{AiService, Message};
+use crate::{AiAdapter, AiService, Message};
 use anyhow::{anyhow, Result};
 use reqwest::Client;
 use serde::{Deserialize, Serialize};
 
-pub struct OpenAIAdapter {
+pub struct OpenAiAdapter {
     host: String,
     api_key: String,
     model: String,
@@ -54,7 +54,7 @@ pub struct OpenAICompletionTokensDetails {
     pub reasoning_tokens: u32,
 }
 
-impl OpenAIAdapter {
+impl OpenAiAdapter {
     pub fn new(api_key: impl Into<String>, model: impl Into<String>) -> Self {
         let client = Client::new();
         Self {
@@ -66,7 +66,7 @@ impl OpenAIAdapter {
     }
 }
 
-impl AiService for OpenAIAdapter {
+impl AiService for OpenAiAdapter {
     async fn complete(&self, messages: &[Message]) -> Result<String> {
         let request = OpenAIChatCompletionRequest {
             model: self.model.clone(),
@@ -93,6 +93,12 @@ impl AiService for OpenAIAdapter {
     }
 }
 
+impl From<OpenAiAdapter> for AiAdapter {
+    fn from(adapter: OpenAiAdapter) -> Self {
+        Self::OpenAi(adapter)
+    }
+}
+
 impl From<&Message> for OpenAIMessage {
     fn from(message: &Message) -> Self {
         Self {
@@ -114,7 +120,7 @@ mod tests {
     #[tokio::test]
     async fn openai_complete_should_work() {
         let api_key = env::var("OPENAI_API_KEY").unwrap();
-        let adapter = OpenAIAdapter::new(api_key, "gpt-4o");
+        let adapter = OpenAiAdapter::new(api_key, "gpt-4o");
         let messages = vec![Message {
             role: Role::User,
             content: "Hello".to_string(),
