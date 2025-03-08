@@ -1,7 +1,6 @@
 use crate::{agent::AgentVariant, AppError, AppState, ChatFile};
 use chat_core::{Agent, AgentContext, AgentDecision, ChatType, Message};
 use serde::{Deserialize, Serialize};
-use sqlx::prelude::FromRow;
 use std::str::FromStr;
 use tracing::warn;
 use utoipa::{IntoParams, ToSchema};
@@ -97,11 +96,11 @@ impl AppState {
                 .into_iter()
                 .find(|m| m != &(user_id as i64))
                 .expect("other user should exist");
-            sqlx::query_as(
+            sqlx::query_as::<_, Message>(
                 r#"
                 INSERT INTO messages (chat_id, sender_id, content)
                 VALUES ($1, $2, $3)
-                RETURNING id
+                RETURNING *
                 "#,
             )
             .bind(chat_id as i64)
