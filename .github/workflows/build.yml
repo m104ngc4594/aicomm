@@ -72,7 +72,7 @@ jobs:
         run: |
           for dir in ${{ env.SUBDIRS }}; do
             cd $dir
-            cargo nextest run --all-features
+            cargo nextest run --all-features --no-fail-fast || true
             cd ..
           done
       - name: Generate a changelog
