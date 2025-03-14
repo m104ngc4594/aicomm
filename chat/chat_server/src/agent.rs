@@ -46,7 +46,11 @@ impl Agent for ProxyAgent {
 
 impl Agent for ReplyAgent {
     async fn process(&self, msg: &str, _ctx: &AgentContext) -> Result<AgentDecision, AgentError> {
-        // If we need it to be flexible: prompt is a jinja2 template, and args is a json
+        // 1. create embeddings for the message
+        // 2. search related docs via vector db with embedding
+        // let docs = searcher.search(msg).await?;
+        // 3. query llm with prompt and related docs as context
+        // let prompt = format!("{} {} {}", self.prompt, docs, msg);
         let prompt = format!("{} {}", self.prompt, msg);
         let messages = vec![ai_sdk::Message::user(prompt)];
         let response = self.adapter.complete(&messages).await?;

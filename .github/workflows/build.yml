@@ -11,7 +11,7 @@ on:
 permissions:
   contents: write
 env:
-  SUBDIRS: chat chatapp/src-tauri
+  SUBDIRS: chat swiftide-pgvector chatapp/src-tauri
 jobs:
   build-rust:
     strategy:
