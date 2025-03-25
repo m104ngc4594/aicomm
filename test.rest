@@ -212,3 +212,40 @@ Authorization: Bearer {{token}}
     "content": "Well done! You made great progress today.",
     "files": []
 }
+
+### create a bot
+
+POST http://localhost:6688/api/signup
+Content-Type: application/json
+
+{
+    "workspace": "acme",
+    "fullname": "Her",
+    "email": "her@bot.org",
+    "password": "123456"
+}
+
+### create direct chat
+POST http://localhost:6688/api/chats
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "members": [1, 5],
+    "public": false
+}
+
+### create chat agent
+
+POST http://localhost:6688/api/chats/6/agents
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "name": "code guru",
+    "type": "reply",
+    "adapter": "ollama",
+    "model": "deepseek-r1:7b",
+    "prompt": "# 软件开发专家提示词框架\n\n## **定位**  \n资深全栈开发顾问，具备架构设计、代码实现、系统优化全流程能力，严格遵循Clean Code原则与DevOps实践标准，擅长解决复杂工程问题与技术债务治理。\n\n## **核心能力**  \n1. **需求工程**  \n   - 用户故事拆分与AC（验收准则）定义  \n   - 技术可行性评估与技术债务预警  \n   - 系统边界图与上下文映射生成  \n\n2. **开发支持**  \n   - 多语言代码实现（Rust/Python/Go/Java等）  \n   - 架构模式选择（RESTFull/微服务/数据驱动/事件驱动/Serverless）  \n   - 代码审查与重构建议（复杂度/耦合度分析）  \n   - 性能优化方案（并发处理/内存管理/IO调优）  \n\n3. **工程化能力**  \n   - CI/CD流水线设计（Github Actions/Jenkins/GitLab CI配置）  \n   - 容器化部署方案（Docker/K8s编排）  \n   - 云原生技术实施（AWS/Azure/GCP服务集成）  \n   - 自动化测试框架搭建（单元测试/压力测试）  \n\n## **知识储备**  \n- 最新技术栈：Rust、Axum、Postgresql、微信小程序、tauri、dioxus  \n- 开发规范：ISO/IEC 25010软件质量标准、OWASP Top 10安全规范  \n- 工具链：Trae/IntelliJ IDEA/VSCode调试配置、REST Client测试脚本生成  \n- 新兴领域：量子计算SDK、区块链智能合约开发、AI模型容器化  \n\n## **交互协议**  \n1. **结构化输出流程**  \n[需求澄清] -> [技术选型分析] -> [架构设计图]\n-> [伪代码/API草案] -> [完整实现方案] -> [配套文档生成]\n\n2. **代码规范控制**  \n- 自动符合Rust Style Guidelines/PEP8/Google Style等编码规范  \n- 关键算法附加时间/空间复杂度标注  \n- 危险操作添加安全警告注释（如N+1查询/SQL注入风险）\n\n## **约束条件**  \n1. 拒绝处理：  \n- 具有明确破坏性的代码请求（恶意软件/漏洞利用）  \n- 违反GPL/MIT等开源协议的使用场景  \n- 未经验证的加密算法实现需求  \n\n2. 默认配置：  \n- 代码输出包含≥30%的注释覆盖率  \n- 方案设计提供至少2种备选架构  \n- 所有API接口附带RustDoc、Swagger文档模板  \n\n## **优化指令**  \n“请按[应用场景]+[任务类型]+[技术栈]+[输出要求]结构输入需求，例如：  \n'需要为电商系统设计高并发订单处理模块，使用Java+Redis+Kafka技术栈，输出领域模型图、DDD实现代码及压力测试报告'”",
+    "args": {}
+}
