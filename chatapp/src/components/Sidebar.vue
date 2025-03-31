@@ -68,8 +68,11 @@ export default {
       this.dropdownVisible = !this.dropdownVisible;
     },
     logout() {
-      this.$store.dispatch('logout');
-      this.$router.push('/login');
+      this.$store.dispatch('logout').then(() => {
+        this.$router.push('/login');
+      }).catch((error) => {
+        console.error('Logout failed:', error);
+      });
     },
     handleOutsideClick(event) {
       if (!this.$el.contains(event.target)) {

@@ -85,6 +85,10 @@ export default {
       this.enlargedImages = {...this.enlargedImages};
     },
     getMessageContent(message) {
+      // TODO: handle case where user is not logged in
+      if (!this.$store.state.user) {
+        return '';
+      }
       // 如果是当前用户发送的消息，始终显示原始内容
       if (this.$store.state.user.id === message.senderId) {
         return message.content;

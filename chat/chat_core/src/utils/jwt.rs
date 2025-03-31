@@ -1,7 +1,7 @@
 use crate::User;
 use jwt_simple::prelude::*;
 
-const JWT_DURATION: u64 = 60 * 60 * 24 * 7;
+const JWT_DURATION: u64 = 60 * 60 * 24 * 7; // 1 week
 const JWT_ISS: &str = "chat_server";
 const JWT_AUD: &str = "chat_web";
 
@@ -32,6 +32,7 @@ impl DecodingKey {
         let opts = VerificationOptions {
             allowed_issuers: Some(HashSet::from_strings(&[JWT_ISS])),
             allowed_audiences: Some(HashSet::from_strings(&[JWT_AUD])),
+            // time_tolerance: Some(Duration::from_secs(JWT_DURATION)),
             ..Default::default()
         };
 
