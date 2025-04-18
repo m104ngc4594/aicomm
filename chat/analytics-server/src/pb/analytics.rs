@@ -4,7 +4,6 @@
 pub struct AnalyticsEvent {
     #[prost(message, optional, tag = "1")]
     pub context: ::core::option::Option<EventContext>,
-    /// 用 oneof 来定义不同类型的用户事件
     #[prost(
         oneof = "analytics_event::EventType",
         tags = "8, 9, 10, 11, 12, 13, 14, 15, 16, 17"
@@ -13,7 +12,6 @@ pub struct AnalyticsEvent {
 }
 /// Nested message and enum types in `AnalyticsEvent`.
 pub mod analytics_event {
-    /// 用 oneof 来定义不同类型的用户事件
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum EventType {
         #[prost(message, tag = "8")]
@@ -92,21 +90,21 @@ pub mod app_exit_event {
 /// / 用户登录事件
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UserLoginEvent {
-    /// / 用户邮箱（Email 是 PII，需要脱敏）
+    /// / 用户邮箱(Email 是 PII，需要脱敏)
     #[prost(string, tag = "1")]
     pub email: ::prost::alloc::string::String,
 }
 /// / 用户登出事件
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UserLogoutEvent {
-    /// / 用户邮箱（Email 是 PII，需要脱敏）
+    /// / 用户邮箱(Email 是 PII，需要脱敏)
     #[prost(string, tag = "1")]
     pub email: ::prost::alloc::string::String,
 }
 /// / 用户注册事件
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UserRegisterEvent {
-    /// / 用户邮箱（Email 是 PII，需要脱敏）
+    /// / 用户邮箱(Email 是 PII，需要脱敏)
     #[prost(string, tag = "1")]
     pub email: ::prost::alloc::string::String,
     /// / 工作空间 ID
@@ -163,7 +161,7 @@ pub struct NavigationEvent {
 /// / 事件上下文
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EventContext {
-    /// / 客户端ID
+    /// / 客户端 ID
     #[prost(string, tag = "1")]
     pub client_id: ::prost::alloc::string::String,
     /// / 应用版本
@@ -171,8 +169,8 @@ pub struct EventContext {
     pub app_version: ::prost::alloc::string::String,
     /// / 系统信息
     #[prost(message, optional, tag = "3")]
-    pub system_info: ::core::option::Option<SystemInfo>,
-    /// / 用户ID
+    pub system: ::core::option::Option<SystemInfo>,
+    /// / 用户 ID
     #[prost(string, tag = "4")]
     pub user_id: ::prost::alloc::string::String,
     /// / 客户端 IP

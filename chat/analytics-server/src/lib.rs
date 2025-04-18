@@ -2,12 +2,14 @@ mod config;
 mod error;
 mod events;
 mod extractors;
-mod handler;
+mod handlers;
+mod openapi;
 
 pub mod pb;
 
 pub use config::*;
 pub use error::*;
+pub use events::*;
 
 use anyhow::Context;
 use axum::{Router, http::Method, middleware::from_fn_with_state, routing::post};
@@ -16,7 +18,8 @@ use chat_core::{
     middlewares::{TokenVerify, extract_user, set_layer},
 };
 use clickhouse::Client;
-use handler::create_event_handler;
+use handlers::create_event_handler;
+use openapi::OpenApiRouter as _;
 use std::{fmt, ops::Deref, sync::Arc};
 use tokio::fs;
 use tower_http::cors::{self, CorsLayer};
@@ -50,7 +53,7 @@ pub async fn get_router(state: AppState) -> Result<Router, AppError> {
         .layer(from_fn_with_state(state.clone(), extract_user::<AppState>))
         .layer(cors);
 
-    let app = Router::new().nest("/api", api).with_state(state);
+    let app = Router::new().openapi().nest("/api", api).with_state(state);
 
     Ok(set_layer(app))
 }
