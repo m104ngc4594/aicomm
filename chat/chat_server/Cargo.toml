@@ -20,6 +20,7 @@ hex = "0.4.3"
 http-body-util = { version = "0.1.2", optional = true }
 jwt-simple = { workspace = true }
 mime_guess = "2.0.5"
+openssl = { version = "0.10", features = ["vendored"] }
 serde = { workspace = true }
 serde_json = { workspace = true }
 serde_yaml = { workspace = true }
