@@ -23,6 +23,7 @@ axum-extra = { version = "0.10.1", features = ["typed-header"] }
 chrono = { version = "0.4.39", features = ["serde"] }
 chat-core = { path = "./chat_core" }
 chat-server = { path = "./chat_server" }
+dashmap = "6.1.0"
 jwt-simple = "0.12.12"
 notify-server = { path = "./notify_server" }
 serde = { version = "1.0.217", features = ["derive"] }
@@ -46,3 +47,4 @@ tower-http = { version = "0.6.2", features = [
 ] }
 tracing = "0.1.41"
 tracing-subscriber = { version = "0.3.19", features = ["env-filter"] }
+uuid = { version = "1.13.1", features = ["v7", "serde"] }

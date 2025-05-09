@@ -8,6 +8,7 @@ mod openapi;
 pub mod pb;
 
 pub use config::*;
+use dashmap::DashMap;
 pub use error::*;
 pub use events::*;
 
@@ -34,6 +35,7 @@ pub struct AppStateInner {
     pub(crate) config: AppConfig,
     pub(crate) dk: DecodingKey,
     pub(crate) client: Client,
+    pub(crate) sessions: Arc<DashMap<String, (String, i64)>>,
 }
 
 pub async fn get_router(state: AppState) -> Result<Router, AppError> {
@@ -91,8 +93,15 @@ impl AppState {
             client = client.with_password(password);
         }
 
+        // TODO: load sessions from db
+        let sessions = Arc::new(DashMap::new());
         Ok(Self {
-            inner: Arc::new(AppStateInner { config, dk, client }),
+            inner: Arc::new(AppStateInner {
+                config,
+                dk,
+                client,
+                sessions,
+            }),
         })
     }
 }

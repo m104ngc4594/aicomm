@@ -454,8 +454,9 @@ function setContext(state) {
 
   const appVersion = packageJson.version;
   const userAgent = navigator.userAgent;
-  // extract os and arch from userAgent
-  const os = userAgent.match(/(Mac|Windows|Linux)/)[0];
+  // extract os and arch from userAgent with fallback
+  const osMatch = userAgent.match(/(Mac|Windows|Linux)/);
+  const os = osMatch ? osMatch[0] : 'Unknown';
   const arch = "arm64";
   // let info = await navigator.userAgentData.getHighEntropyValues([
   //   "architecture",
